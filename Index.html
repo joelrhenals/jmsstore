@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo JMA Sport</title>
+    <style>
+        :root {
+            --bg-color: #0f1215;
+            --bg-accent: #1a1f24;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --primary-accent: #c4a77d; /* Tono bronce/dorado deportivo */
+            --price-color: #ffffff;
+            
+            /* Estados */
+            --status-available: #4caf50;
+            --status-out: #f44336;
+            --status-order: #ff9800;
+            
+            --border-color: #2d343a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding-bottom: 50px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #1a1f24 0%, #0f1215 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 { color: var(--primary-accent); text-transform: uppercase; letter-spacing: 3px; margin: 0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--bg-accent);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover { transform: translateY(-5px); border-color: var(--primary-accent); }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background-color: #000;
+            object-fit: contain;
+        }
+
+        .product-info { padding: 20px; flex-grow: 1; }
+
+        .category { color: var(--primary-accent); font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+
+        .product-title { font-size: 1.5rem; margin: 10px 0; color: #fff; }
+
+        /* SECCIÓN DE PRECIO */
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--price-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+        .product-price span { font-size: 0.9rem; color: var(--text-muted); font-weight: normal; }
+
+        /* TABLA DE VARIANTES (TALLAS Y STOCK) */
+        .variant-container {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .variant-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+        }
+
+        .variant-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px dotted #333;
+        }
+
+        .variant-row:last-child { border-bottom: none; }
+
+        .size-label { font-weight: bold; color: var(--primary-accent); }
+
+        .stock-count { font-family: monospace; }
+
+        /* ETIQUETAS DE ESTADO */
+        .stock-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .in-stock { color: var(--status-available); }
+        .out-of-stock { color: var(--status-out); opacity: 0.6; }
+
+        .badge-footer {
+            margin-top: auto;
+            padding: 15px 20px;
+            background-color: rgba(0,0,0,0.1);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>JMA Sport</h1>
+    <p style="color: var(--text-muted);">Inventario actualizado de productos</p>
+</header>
+
+<div class="container">
+    <div class="product-grid">
+
+        <div class="product-card">
+            <img src="https://s.alicdn.com/@sc04/kf/H38b09965fb9b448b89bdc39e264e8c170/Factory-Custom-Logo-Shin-Guard-Taekwondo-Leg-Protector-Arm-Guard.jpg" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Combo 1: Protector de antebrazo + espinilleras</h3>
+                
+                <div class="product-price">$ 120.000 <span>COP</span></div>
+
+                <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count in-stock">1 disponible</span>
+                        <span class="stock-count" style="color: var(--status-order);">7 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count in-stock">1 disponible</span>
+                        <span class="stock-count" style="color: var(--status-order);">3 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XL</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+           </div>
+            <div class="badge-footer" style="color: var(--status-available);">En Stock</div>
+        </div>
+
+    <div class="product-card">
+            <img src="https://tiendamarcial.com/arnobysinam/wp-content/uploads/2024/08/PRAB001-antebrazos-protector-brazo-taekwondo-daedo-oficial-entrenamiento-campeonato-wtf-wt-shinguard-colombia-shin.jpg" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Protector de antebrazo</h3>
+                
+                <div class="product-price">$ 65.000 <span>COP</span></div>
+
+                <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count in-stock">1 disponible</span>
+                        <span class="stock-count" style="color: var(--status-order);">7 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count in-stock">1 disponible</span>
+                        <span class="stock-count" style="color: var(--status-order);">3 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XL</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-available);">En Stock</div>
+        </div> 
+
+    <div class="product-card">
+            <img src="https://tiendamarcial.com/arnobysinam/wp-content/uploads/2024/08/PRCN001-canilleras-protector-canilla-tibia-pierna-taekwondo-daedo-oficial-entrenamiento-campeonato-wtf-wt-shinguard-colombia.jpg" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Protector espinilleras</h3>
+                
+                <div class="product-price">$ 65.000 <span>COP</span></div>
+
+                <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    
+                     <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count in-stock">1 disponible</span>
+                        <span class="stock-count" style="color: var(--status-order);">7 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count in-stock">1 disponible</span>
+                        <span class="stock-count" style="color: var(--status-order);">3 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XL</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-available);">En Stock</div>
+        </div> 
+
+    <div class="product-card">
+            <img src="https://http2.mlstatic.com/D_Q_NP_2X_870936-CBT93868008179_102025-P.webp" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Combo 2: Guantines + empeineras</h3>
+                
+                <div class="product-price">$ 110.000 <span>COP</span></div>
+
+               <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XS</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">7 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XL</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-order);">En camino</div>
+        </div> 
+
+    <div class="product-card">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/61h+5nHnELL._AC_UL495_SR435,495_.jpg" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Guantines de Taekwondo</h3>
+                
+                <div class="product-price">$ 55.000 <span>COP</span></div>
+
+               <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XS</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">7 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count in-stock">5 disponibles</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XL</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-available);">En Stock</div>
+        </div> 
+
+    <div class="product-card">
+            <img src="https://http2.mlstatic.com/D_Q_NP_2X_911487-MCO100197644519_122025-P.webp" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Empeineras de Taekwondo</h3>
+                
+                <div class="product-price">$ 65.000 <span>COP</span></div>
+
+                <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XS</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">7 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">2 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla XL</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-order);">En camino</div>
+        </div> 
+
+            <div class="product-card">
+            <img src="https://ae01.alicdn.com/kf/Hfcb2c2e3c74f4e3e8940116a86048f39X.jpg" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Protector genital masculino</h3>
+                
+                <div class="product-price">$ 65.000 <span>COP</span></div>
+
+               <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count in-stock">2 disponibles</span>
+                        <span class="stock-count" style="color: var(--status-out);">0 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count in-stock">5 disponibles</span>
+                        <span class="stock-count" style="color: var(--status-out);">0 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-available);">En Stock</div>
+        </div> 
+
+            <div class="product-card">
+            <img src="https://ae01.alicdn.com/kf/Ha1d54c5fcb014650adea6e095d4207e3B.jpg" alt="Producto" class="product-image">
+            <div class="product-info">
+                <span class="category">Protecciones</span>
+                <h3 class="product-title">Protector genital femenino</h3>
+                
+                <div class="product-price">$ 65.000 <span>COP</span></div>
+
+               <div class="variant-container">
+                    <div class="variant-header">
+                        <span>Talla</span>
+                        <span>Disponibilidad</span>
+                        <span>Estado</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla S</span>
+                        <span class="stock-count in-stock">2 disponibles</span>
+                        <span class="stock-count" style="color: var(--status-out);">0 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla M</span>
+                        <span class="stock-count in-stock">2 disponibles</span>
+                        <span class="stock-count" style="color: var(--status-out);">0 en camino</span>
+                    </div>
+                    <div class="variant-row">
+                        <span class="size-label">Talla L</span>
+                        <span class="stock-count out-of-stock">Agotado</span>
+                        <span class="stock-count" style="color: var(--status-order);">Bajo pedido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="badge-footer" style="color: var(--status-available);">En Stock</div>
+        </div> 
+    </div>
+</div>
+
+</body>
+</html>
